@@ -1,5 +1,12 @@
 ServiceNow GlideRecord API
 ==========================
+Using ServiceNow GlideRecord API in Python you can run GlideRecord commands right from your own computer and/or automate ServiceNow tasks.
+
+Current capabilities are:
+- Query records using filters (sysparm_query)
+- Create new records in any given table on ServiceNow
+- Update existing records
+- Remove a record or a set of records all at once, using filters
 
 ####GlideRecord API for ServiceNow in Python
 
