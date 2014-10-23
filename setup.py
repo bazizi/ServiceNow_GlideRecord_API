@@ -7,7 +7,7 @@ setup(
   author = 'Behnam Azizi',
   author_email = 'bazizi@sfu.ca',
   url = 'https://github.com/bazizi/ServiceNow_GlideRecord_API.git', # use the URL to the github repo
-  download_url = 'https://github.com/peterldowns/mypackage/tarball/0.1', # I'll explain this in a second
+  download_url = 'https://github.com/bazizi/GlideRecord/tarball/0.1', # I'll explain this in a second
   keywords = ['ServiceNow', 'REST API', 'REST', 'GlideRecord'], # arbitrary keywords
   classifiers = [],
 )
