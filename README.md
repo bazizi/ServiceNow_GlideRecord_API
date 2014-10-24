@@ -16,6 +16,8 @@ Current capabilities are:
 Query a table using filters:
 
 ```python
+from GlideRecord import *
+
 #Set which table to query
 gr = GlideRecord("incident")
 
