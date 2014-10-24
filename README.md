@@ -27,8 +27,7 @@ gr.set_server("https://sfustg.service-now.com/")
 #Set user credentials to send REST requests
 #This can be done either by entering username password in the command line (recommended):
 gr.get_credentials()
-#-- OR -- Can be done by storing the username/passowrd in plain text (not recommended)
-#This can be done either through the code (not recommended):
+#-- OR -- Can be done by storing the username/passowrd in plain text (not recommended), if so uncomment next line and comment previous line
 #gr.set_credentials("YOUR USERNAME GOES HERE", "YOUR PASSWORD GOES HERE")
 
 #Add search filters
