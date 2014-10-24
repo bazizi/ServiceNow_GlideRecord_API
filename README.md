@@ -13,7 +13,7 @@ Current capabilities are:
 
 ####Examples:
 
-#####Query a table using filters:
+#####Read data in a table, using filters:
 
 ```python
 from GlideRecord import *
