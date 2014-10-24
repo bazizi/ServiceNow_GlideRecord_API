@@ -86,11 +86,12 @@ class GlideRecord:
         rs = self.results[self.currentIndex][key]
         return rs
 
-    def setValues(self, key, value):
-        self.results[self.currentIndex][key] = value
-        self.refreshQuery()
+    def setValues(self, key, value):        
+        request = re.sub('sysparm_action=[^&]+', 'sysparm_action=%s' % 'update', self.query_data['URL'])
         self.post_url(request, json.dumps({key:value}))
         self.query()
+        for i in range(len(self.results)):
+            self.results[i][key] = value
 
     def insert(self, data):
         request = re.sub('sysparm_action=[^&]+', 'sysparm_action=%s' % 'insert', self.query_data['URL'])
@@ -194,6 +195,7 @@ class GlideRecord:
             sys.exit(0)
 
             #print(error)
+        print("Request was sent successfully.")
 
     #This function sends GET requests to a given URI
     def get_url(self, url):
