@@ -12,7 +12,11 @@ Current capabilities are:
 ####Installation:
 #####Using PIP (Recommended)
 If your version of Python supports PIP package manager, installation is as simple as running this command:
-pip install GlideRecord
+
+*pip install GlideRecord*
+
+If not, it is recommended that you install pip from the following URL, and retry the above command:
+http://pip.readthedocs.org/en/latest/installing.html
 
 #####Manual installation using Git
 If you have Git, you can install GlideRecord API by running these commands in order:
