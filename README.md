@@ -125,3 +125,20 @@ record_info = {
 gr.insert(record_info)
 
 ```
+
+####Available Member Functions:
+| Funcation name  | Description  | Example |
+|---|---|---|
+| set\_server(server\_name) | Used to indicate which server to query | set\_server("ubc.service-now.com") |
+| set\_credentials(username, password) | Used to indicate which username/password is used to query ServiceNow| set\_credentials("hpotter", "somepassword") |
+| get\_credentials() | When this function is called, user credentials are read from command line | get\_credentials() |
+| addQuery(key, value) | Adds a filter to the query | addQuery("active", "true") |
+| addEncodedQuery(filter) | Used to add a sysparm_query to the GlideRecord | addEncodedQuery("active=true") |
+| query()  | queries the table  | query() |
+| next() | returns 'true' if cursor has not reached the end of results | while gr.next(): print gr.getRow() |
+| insert(json\_data) | used to insert a new record into a table | insert(\{"u\_phone_number":"12345"\}) |
+| deleteMultiple() | used to delete all records that match the queries | deleteMultiple() |
+| setValues(key, value) | Sets the values of cells in a column | setValues('u\_phone\_number', '12345') |
+| delete() | Delete a single record. The syparm_sys_id of the record needs to be added to query beforehand | delete() |
+| getValue(key) | Get the value of a cell in the row where cursor is pointing | getValue('u\_phone\_number') |
+
