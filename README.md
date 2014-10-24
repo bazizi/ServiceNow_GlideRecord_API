@@ -8,12 +8,12 @@ Current capabilities are:
 - Update existing records
 - Remove a record or a set of records all at once, using filters
 
-####GlideRecord API for ServiceNow in Python
+###GlideRecord API for ServiceNow in Python
 
 
-#####Examples:
+####Examples:
 
-Query a table using filters:
+#####Query a table using filters:
 
 ```python
 from GlideRecord import *
