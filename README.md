@@ -23,6 +23,7 @@ If you have Git, you can install GlideRecord API by running these commands in or
 ####Examples:
 
 #####Read data in a table, using filters:
+The below code snippet **reads** records stored in the 'incident' table that have status 'active' and are created by someone with a specific caller ID.
 ```python
 from GlideRecord import *
 
@@ -58,8 +59,11 @@ while gr.next():
     print "\r\n"
 
 ```
+<br />
 
 #####Delete a set of records returned by a filter:
+The below code snippet **deletes** all 'incident' records  that status 'active' and have the specified caller ID.
+
 ```python
 from GlideRecord import *
 
@@ -84,8 +88,11 @@ gr.deleteMultiple()
 
 
 ```
+<br />
+
 
 #####Insert a new record into any given table:
+The below code snippet **inserts** a new record into the 'incident' table, using the specified values.
 ```python
 from GlideRecord import *
 
