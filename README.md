@@ -141,4 +141,23 @@ gr.insert(record_info)
 | setValues(key, value) | Sets the values of cells in a column | setValues('u\_phone\_number', '12345') |
 | delete() | Delete a single record. The syparm_sys_id of the record needs to be added to query beforehand | delete() |
 | getValue(key) | Get the value of a cell in the row where cursor is pointing | getValue('u\_phone\_number') |
+==============================================================================================
+###License Information:
 
+The MIT License (MIT)<br />
+Copyright (c) 2014 Behnam Azizi<br />
+Permission is hereby granted, free of charge, to any person obtaining a copy<br />
+of this software and associated documentation files (the "Software"), to deal<br />
+in the Software without restriction, including without limitation the rights<br />
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<br />
+copies of the Software, and to permit persons to whom the Software is<br />
+furnished to do so, subject to the following conditions:<br />
+The above copyright notice and this permission notice shall be included in all<br />
+copies or substantial portions of the Software.<br />
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br />
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<br />
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<br />
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<br />
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<br />
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<br />
+SOFTWARE.
