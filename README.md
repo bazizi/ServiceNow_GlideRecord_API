@@ -25,9 +25,10 @@ gr = GlideRecord("incident")
 gr.set_server("https://sfustg.service-now.com/")
 
 #Set user credentials to send REST requests
-#This can be done either by entering username password in the command line (recommended):
+#One of the next two lines should be commented
+#Comment the first one if: You will want to provide username/password from command line (recommended)
+#Comment the second on if: You want to provide username/password in plain text (not recommended)
 gr.get_credentials()
-#-- OR -- Can be done by storing the username/passowrd in plain text (not recommended), if so uncomment next line and comment previous line
 #gr.set_credentials("YOUR USERNAME GOES HERE", "YOUR PASSWORD GOES HERE")
 
 #Add search filters
@@ -50,7 +51,7 @@ while gr.next():
 
 ```
 
-Delete a set of records returned by a filter:
+#####Delete a set of records returned by a filter:
 
 ```python
 gr = GlideRecord("incident")
@@ -62,7 +63,7 @@ gr.deleteMultiple()
 
 ```
 
-Create a new record:
+#####Create a new record:
 
 ```python
 #Set which table to query
