@@ -14,7 +14,6 @@ Current capabilities are:
 ####Examples:
 
 #####Read data in a table, using filters:
-
 ```python
 from GlideRecord import *
 
@@ -52,7 +51,6 @@ while gr.next():
 ```
 
 #####Delete a set of records returned by a filter:
-
 ```python
 from GlideRecord import *
 
@@ -78,22 +76,31 @@ gr.deleteMultiple()
 
 ```
 
-#####Create a new record:
-
+#####Insert a new record into any given table:
 ```python
+from GlideRecord import *
+
 #Set which table to query
 gr = GlideRecord("incident")
 
-record_info = """
-{
+#Set the url to the server were the ServiceNow instance is
+gr.set_server("https://sfustg.service-now.com/")
+
+#Set user credentials to send REST requests
+#One of the next two lines should be commented
+#Comment the first one if: You will want to provide username/password from command line (recommended)
+#Comment the second on if: You want to provide username/password in plain text (not recommended)
+gr.get_credentials()
+#gr.set_credentials("YOUR USERNAME GOES HERE", "YOUR PASSWORD GOES HERE")
+
+record_info = {
     "caller_id" : "James Bond [jbond]",
-    "u_phone_number" : "12345",
+    "u_phone_number" : "123456",
     "u_service" : "Quality Assurance",
     "short_description" : "Creating a record using GlideRecord API for Python",
     "description" : "ServiceNow GlideRecord API allows you to Create a record using Python", 
     "assignment_group" : "ServiceNow QA Team"
 }
-"""
 
 gr.insert(record_info)
 
