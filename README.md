@@ -9,7 +9,16 @@ Current capabilities are:
 - Remove a record or a set of records all at once, using filters
 
 ###GlideRecord API for ServiceNow in Python
+####Installation:
+#####Using PIP (Recommended)
+If your version of Python supports PIP package manager, installation is as simple as running this command:
+pip install GlideRecord
 
+#####Manual installation using Git
+If you have Git, you can install GlideRecord API by running these commands in order:
+- *git clone https://github.com/bazizi/ServiceNow_GlideRecord_API.git*
+- *cd ServiceNow_GlideRecord_API*
+- *python setup.py install*
 
 ####Examples:
 
