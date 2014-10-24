@@ -10,64 +10,56 @@
 
 """
 
-from ConfigParser import SafeConfigParser
 import urllib2
 import base64
 import json
 import re
 import getpass
 import sys
-import os
 
 class GlideRecord:
     def __init__(self, tableName):
+        self.query_data = dict()
         self.username = None
         self.password = None
 
-        parser = SafeConfigParser()
-        parser.read('settings.ini')
+        self.encodedAuth = None
+        self.query_data['server'] = None
+        self.query_data['tableName'] = tableName
+        self.query_data['actionType'] = "getRecords"
+        self.results = {}
+        self.currentIndex = -1
+        self.query_data['rowCount'] = 100
+        self.query_data['sysparm_query'] = None
 
-        #If user credentials are not read from cmd, read them from the settings.ini file
-        self.validate_user()
 
-        if self.username is None and self.password is None:
-            self.username = parser.get('user_settings', 'username')
-            self.password = parser.get('user_settings', 'password')
-            if len(self.username) == 0 or len(self.password) == 0:
-                print("\r\n   *** Empty username/password was provided. ***\r\n   Please make sure username and "
-                      "password fields in settings.ini are filled in OR run this command instead:\r\n"
-                      "           python script.py -u <username>")
-                sys.exit(0)
+    def set_server(self, srvname):
+        self.query_data['server'] = srvname
+        self.query_data['URL'] = '%s/%s.do?JSONv2&sysparm_record_count=%s&sysparm_action=%s&sysparm_query=' % (self.query_data['server'], self.query_data['tableName'], self.query_data['rowCount'], self.query_data['actionType'])
+        #print self.query_data['URL']
 
+    def set_credentials(self, uname, passwd):
+        self.username = uname
+        self.password = passwd
+        self.reset_credentials()
+
+
+    def get_credentials(self):
+            self.username = raw_input("Please enter ServiceNow username: ")
+            self.password = getpass.getpass("Please enter ServiceNow password for %s:" % self.username)
+            self.reset_credentials()
+
+
+    def reset_credentials(self):
         self.encodedAuth = base64.b64encode(self.username + ":" + self.password)
 
-        self.server = parser.get('server_settings', 'server')
+    def is_user_creds_valid(self):
+        request = re.sub('sysparm_record_count=[^&]+', 'sysparm_record_count=1', self.query_data['URL'])
+        result = self.get_url(request)
+        if result:
+            return True
+        return False
 
-        self.tableName = tableName
-        self.actionType = "getRecords"
-        self.results = {}
-
-        self.currentIndex = -1
-        self.rowCount = 100
-        self.query_data = dict()
-        self.query_data['sysparm_query'] = None
-        self.query_data['URL'] = '%s/%s.do?JSONv2&sysparm_record_count=%s&sysparm_action=%s&sysparm_query=' % (self.server, self.tableName, self.rowCount, self.actionType)
-
-
-    def print_help(self):
-        print "Usage examples:\r\n"
-        print "Username and password from CMD:\r\n  python script.py -u <username>\r\n"
-        print "Username and password from settings.ini:\r\n  python script.py"
-
-    def validate_user(self):
-        if len(sys.argv) < 2:
-            return
-        elif sys.argv[1].lower() == '-help':
-            self.print_help()
-            sys.exit(0)
-        elif sys.argv[1].lower() == '-u':
-            self.username = sys.argv[2]
-            self.password = getpass.getpass("Please enter ServiceNow password for %s:" % self.username)
 
     def get(self, key, value):
         self.addQuery(key, value)
@@ -88,7 +80,7 @@ class GlideRecord:
             self.query_data['sysparm_query'] = queryString
         else:
             self.query_data['sysparm_query'] += "^" + queryString
-        print self.query_data
+        #print self.query_data
 
     def getValue(self, key):
         rs = self.results[self.currentIndex][key]
@@ -113,7 +105,7 @@ class GlideRecord:
         data = json.dumps({
             'sysparm_query' : self.query_data['sysparm_query']
         })
-        print data
+        #print data
         self.post_url(request, data)
 
     def deleteMultiple(self):
@@ -125,8 +117,8 @@ class GlideRecord:
 
 
     def refreshQuery(self):
-        self.query_data['URL'] = re.sub('sysparm_action=[^&]+', 'sysparm_action=%s' % self.actionType, self.query_data['URL'])
-        self.query_data['URL'] = re.sub('sysparm_record_count=[^&]+', 'sysparm_record_count=%s' % self.rowCount, self.query_data['URL'])
+        self.query_data['URL'] = re.sub('sysparm_action=[^&]+', 'sysparm_action=%s' % self.query_data['actionType'], self.query_data['URL'])
+        self.query_data['URL'] = re.sub('sysparm_record_count=[^&]+', 'sysparm_record_count=%s' % self.query_data['rowCount'], self.query_data['URL'])
 
     def getRow(self):
         rs = []
@@ -153,7 +145,7 @@ class GlideRecord:
         else:
             self.query_data['sysparm_query'] += "^%s=%s" % (key, value)
 
-        print self.query_data
+        #print self.query_data
 
     def query(self):
         request = self.query_data['URL'] + self.query_data['sysparm_query']
@@ -166,19 +158,18 @@ class GlideRecord:
         return self.query_data['URL']
 
     def setRowCount(self, n):
-        self.rowCount = n
+        self.query_data['rowCount'] = n
         self.refreshQuery()
 
     def getRowCount(self):
         return len(self.results)
 
-   #This is a helper function that is used to send GET, PUT or POST requests to Jira
+    #This is a helper function that is used to send GET, PUT or POST requests to Jira
     #This function is used by other functions and not the user directly
     def req_data(self, url, data, method):
         """Sends a request for data"""
-        #subprocess.Popen("pybot ITSM-36_c\\ITSM-36_test.txt", shell=True, stdout=PIPE).stdout.read()
         values = data
-        print "Requesting: %s" % url
+        #print "Requesting: %s" % url
         if data != '':
             #print "Using Data: %s" % data
             req = urllib2.Request(url, data=values)
