@@ -54,12 +54,27 @@ while gr.next():
 #####Delete a set of records returned by a filter:
 
 ```python
+from GlideRecord import *
+
+#Set which table to query
 gr = GlideRecord("incident")
+
+#Set the url to the server were the ServiceNow instance is
+gr.set_server("https://sfustg.service-now.com/")
+
+#Set user credentials to send REST requests
+#One of the next two lines should be commented
+#Comment the first one if: You will want to provide username/password from command line (recommended)
+#Comment the second on if: You want to provide username/password in plain text (not recommended)
+gr.get_credentials()
+#gr.set_credentials("YOUR USERNAME GOES HERE", "YOUR PASSWORD GOES HERE")
 
 #Add search filters
 gr.addQuery("active", "true")
 gr.addEncodedQuery('caller_id=76239f4b875a78006fa670406d434d39')
+
 gr.deleteMultiple()
+
 
 ```
 
