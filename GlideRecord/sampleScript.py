@@ -30,6 +30,16 @@ gr.addQuery("caller_id", "76239f4b875a78006fa670406d434d39")
 
 gr.comments = "hello"
 
+record_info = """
+{
+    "caller_id" : "James Bond [jbond]",
+    "u_phone_number" : "12345",
+    "u_service" : "Quality Assurance",
+    "short_description" : "Creating a record using GlideRecord API for Python",
+    "description" : "ServiceNow GlideRecord API allows you to Create a record using Python", 
+    "assignment_group" : "ServiceNow QA Team"
+}
+"""
 
 gr.insert()
 
