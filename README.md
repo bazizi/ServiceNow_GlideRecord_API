@@ -25,7 +25,7 @@ If you have Git, you can install GlideRecord API by running these commands in or
 - *python setup.py install*
 
 #####Need help?
-If you need any help regarding installation and/or usage of GlideRecord API, feel free to contact me via my email: b.a
+If you need any help regarding installation and/or usage of GlideRecord API, feel free to contact me via my email: b.azizi@rocketmail.com
 
 ####Examples:
 
