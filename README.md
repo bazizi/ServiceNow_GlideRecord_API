@@ -18,6 +18,10 @@ If your version of Python supports PIP package manager, installation is as simpl
 If not, it is recommended that you install pip from the following URL, and retry the above command:
 http://pip.readthedocs.org/en/latest/installing.html
 
+Also please note that in Linux systems you may need to run the above commands as root:
+
+*sudo pip install GlideRecord*
+
 #####Manual installation using Git
 If you have Git, you can install GlideRecord API by running these commands in order:
 - *git clone https://github.com/bazizi/ServiceNow_GlideRecord_API.git*
