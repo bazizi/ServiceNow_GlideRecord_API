@@ -72,6 +72,37 @@ while gr.next():
 ```
 <br />
 
+#####Update existing records, using filters:
+The below code snippet **updates** exactly 100 of the records stored in the 'incident' table that have status 'active' and are created by someone with the give caller_id.
+
+```python
+from GlideRecord import *
+
+#Set which table to query
+gr = GlideRecord("incident")
+
+#Set the url to the server were the ServiceNow instance is
+gr.set_server("https://sfustg.service-now.com/")
+
+#Set user credentials to send REST requests
+#One of the next two lines should be commented
+#Comment the first one if: You will want to provide username/password from command line (recommended)
+#Comment the second on if: You want to provide username/password in plain text (not recommended)
+gr.get_credentials()
+#gr.set_credentials("YOUR USERNAME GOES HERE", "YOUR PASSWORD GOES HERE")
+
+#The following command indicates that only 150 of the results should be updated (the default is 100 per query)
+#Also if you want to update all records, simple use 'gr.setRowCount("")' (no quotes)
+gr.setRowCount(150)
+
+gr.addEncodedQuery('active=true^contact_type=self-service')
+
+#Set the caller ID of these 100 records to 
+gr.setValues("caller_id", "Behnam Azizi [bazizi]")
+
+
+```
+
 #####Delete a set of records returned by a filter:
 The below code snippet **deletes** all 'incident' records  that status 'active' and have the specified caller ID.
 
