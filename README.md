@@ -73,7 +73,7 @@ while gr.next():
 <br />
 
 #####Update existing records, using filters:
-The below code snippet **updates** exactly 100 of the records stored in the 'incident' table that have status 'active' and are created by someone with the give caller_id.
+The below code snippet **updates** exactly 100 of the records stored in the 'incident' table that have status 'active' and contact-type 'self-service'.
 
 ```python
 from GlideRecord import *
