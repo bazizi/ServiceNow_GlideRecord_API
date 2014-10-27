@@ -41,9 +41,9 @@ gr = GlideRecord("incident")
 gr.set_server("https://sfustg.service-now.com/")
 
 #Set user credentials to send REST requests
-#One of the next two lines should be commented
-#Comment the first one if: You will want to provide username/password from command line (recommended)
-#Comment the second on if: You want to provide username/password in plain text (not recommended)
+#Only one of the next two lines should be uncommented
+#Uncomment the first one if: You will want to provide username/password from command line (recommended)
+#Uncomment the second on if: You want to provide username/password in plain text (not recommended)
 gr.get_credentials()
 #gr.set_credentials("YOUR USERNAME GOES HERE", "YOUR PASSWORD GOES HERE")
 
@@ -81,9 +81,9 @@ gr = GlideRecord("incident")
 gr.set_server("https://sfustg.service-now.com/")
 
 #Set user credentials to send REST requests
-#One of the next two lines should be commented
-#Comment the first one if: You will want to provide username/password from command line (recommended)
-#Comment the second on if: You want to provide username/password in plain text (not recommended)
+#Only one of the next two lines should be uncommented
+#Uncomment the first one if: You will want to provide username/password from command line (recommended)
+#Uncomment the second on if: You want to provide username/password in plain text (not recommended)
 gr.get_credentials()
 #gr.set_credentials("YOUR USERNAME GOES HERE", "YOUR PASSWORD GOES HERE")
 
@@ -110,9 +110,9 @@ gr = GlideRecord("incident")
 gr.set_server("https://sfustg.service-now.com/")
 
 #Set user credentials to send REST requests
-#One of the next two lines should be commented
-#Comment the first one if: You will want to provide username/password from command line (recommended)
-#Comment the second on if: You want to provide username/password in plain text (not recommended)
+#Only one of the next two lines should be uncommented
+#Uncomment the first one if: You will want to provide username/password from command line (recommended)
+#Uncomment the second on if: You want to provide username/password in plain text (not recommended)
 gr.get_credentials()
 #gr.set_credentials("YOUR USERNAME GOES HERE", "YOUR PASSWORD GOES HERE")
 
@@ -132,18 +132,24 @@ gr.insert(record_info)
 ####Available Member Functions:
 | Funcation name  | Description  | Example |
 |---|---|---|
-| set\_server(server\_name) | Used to indicate which server to query | set\_server("ubc.service-now.com") |
-| set\_credentials(username, password) | Used to indicate which username/password is used to query ServiceNow| set\_credentials("hpotter", "somepassword") |
-| get\_credentials() | When this function is called, user credentials are read from command line | get\_credentials() |
-| addQuery(key, value) | Adds a filter to the query | addQuery("active", "true") |
-| addEncodedQuery(filter) | Used to add a sysparm_query to the GlideRecord | addEncodedQuery("active=true") |
+| set\_server(server\_name) | Used to indicate which server to query | gr.set\_server("ubc.service-now.com") |
+| set\_credentials(username, password) | Used to indicate which username/password is used to query ServiceNow| gr.set\_credentials("hpotter", "somepassword") |
+| get\_credentials() | When this function is called, user credentials are read from command line | gr.get\_credentials() |
+| addQuery(key, value) | Adds a filter to the query | gr.addQuery("active", "true") |
+| addEncodedQuery(filter) | Used to add a sysparm_query to the GlideRecord | gr.addEncodedQuery("active=true") |
 | query()  | queries the table  | query() |
+| getRow() | returns an array containing the table row where cursor is pointing to | gr.getRow() |
+| getValue(column_name) | returns the value of a column in the current row | gr.getValue('u_phone_number') |
+| getHeaders() | returns the table headers (names of table columns) in an array | gr.getHeaders() |
+| getQuery() | Returns the whole query string that is applied on the table | print gr.getQuery() |
+| getRowCount() | Returns the number of results returned by a query | print "Number of rows are %s" % gr.getRowCount() |
 | next() | returns 'true' if cursor has not reached the end of results | while gr.next(): print gr.getRow() |
-| insert(json\_data) | used to insert a new record into a table | insert(\{"u\_phone_number":"12345"\}) |
-| deleteMultiple() | used to delete all records that match the queries | deleteMultiple() |
-| setValues(key, value) | Sets the values of cells in a column | setValues('u\_phone\_number', '12345') |
-| delete() | Delete a single record. The syparm_sys_id of the record needs to be added to query beforehand | delete() |
-| getValue(key) | Get the value of a cell in the row where cursor is pointing | getValue('u\_phone\_number') |
+| hasNext() | returns true if the cursor is not at the end of results  | gr.hasNext() |
+| insert(json\_data) | used to insert a new record into a table | gr.insert(\{"u\_phone_number":"12345"\}) |
+| deleteMultiple() | used to delete all records that match the queries | gr.deleteMultiple() |
+| setValues(key, value) | Sets the values of cells in a column | gr.setValues('u\_phone\_number', '12345') |
+| delete() | Delete a single record. The syparm_sys_id of the record needs to be added to query beforehand | gr.delete() |
+| getValue(key) | Get the value of a cell in the row where cursor is pointing | gr.getValue('u\_phone\_number') |
 ==============================================================================================
 ###License Information:
 
