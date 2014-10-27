@@ -55,8 +55,9 @@ gr.get_credentials()
 gr.addQuery("active", "true")
 gr.addEncodedQuery('caller_id=76239f4b875a78006fa670406d434d39')
 
-#Limit the number of results, to avoid making the server unnecessarily busy (The default is 100 results per query)
-gr.setRowCount(1)
+#Limits the number of results, to avoid making the server unnecessarily busy (The default is 100 results per query)
+#if you want to retrieve all records, simple use gr.setRowCount("")
+gr.setRowCount(50)
 
 #Query ServiceNow
 gr.query()
@@ -92,7 +93,7 @@ gr.get_credentials()
 #gr.set_credentials("YOUR USERNAME GOES HERE", "YOUR PASSWORD GOES HERE")
 
 #The following command indicates that only 150 of the results should be updated (the default is 100 per query)
-#Also if you want to update all records, simple use 'gr.setRowCount("")' (no quotes)
+#Also if you want to update all records, simple use gr.setRowCount("")
 gr.setRowCount(150)
 
 gr.addEncodedQuery('active=true^contact_type=self-service')
@@ -126,6 +127,8 @@ gr.get_credentials()
 gr.addQuery("active", "true")
 gr.addEncodedQuery('caller_id=76239f4b875a78006fa670406d434d39')
 
+#Note that by default, only up to 100 rows are affected, if you want to delete all records returned by the filter,
+#simple use gr.setRowCount("")
 gr.deleteMultiple()
 
 
