@@ -128,7 +128,7 @@ gr.addQuery("active", "true")
 gr.addEncodedQuery('caller_id=76239f4b875a78006fa670406d434d39')
 
 #Note that by default, only up to 100 rows are affected, if you want to delete all records returned by the filter,
-#simple use gr.setRowCount("")
+#simply use gr.setRowCount("")
 gr.deleteMultiple()
 
 
