@@ -24,6 +24,9 @@ If you have Git, you can install GlideRecord API by running these commands in or
 - *cd ServiceNow_GlideRecord_API*
 - *python setup.py install*
 
+#####Need help?
+If you need any help regarding installation and/or usage of GlideRecord API, feel free to contact me via my email: b.a
+
 ####Examples:
 
 #####Read data in a table, using filters:
