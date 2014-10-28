@@ -28,8 +28,14 @@ If you have Git, you can install GlideRecord API by running these commands in or
 - *cd ServiceNow_GlideRecord_API*
 - *python setup.py install*
 
+---
+---
+
 #####Need help?
 If you need any help regarding installation and/or usage of GlideRecord API, feel free to contact me via my email: b.azizi@rocketmail.com
+
+---
+---
 
 ####Examples:
 
@@ -73,6 +79,8 @@ while gr.next():
 ```
 <br />
 
+---
+
 #####Update existing records, using filters:
 The below code snippet **updates** exactly 150 of the records stored in the 'incident' table that have status 'active' and contact-type 'self-service'.
 
@@ -103,6 +111,9 @@ gr.setValues("caller_id", "Behnam Azizi [bazizi]")
 
 
 ```
+<br />
+
+---
 
 #####Delete a set of records returned by a filter:
 The below code snippet **deletes** all 'incident' records  that status 'active' and have the specified caller ID.
@@ -135,6 +146,7 @@ gr.deleteMultiple()
 ```
 <br />
 
+---
 
 #####Insert a new record into any given table:
 The below code snippet **inserts** a new record into the 'incident' table, using the specified values.
@@ -166,6 +178,13 @@ record_info = {
 gr.insert(record_info)
 
 ```
+
+<br />
+
+---
+---
+
+
 ####Unit Testing
 Some unit testing is added as well to ensure everything works as expected. To do the unit testing yourself, create a Python script similar to the following and run it:
 
