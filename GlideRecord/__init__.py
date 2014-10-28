@@ -247,7 +247,7 @@ class GlideRecord:
             self.clearQuery()
             self.setRowCount("")
             self.addQuery("active", "true")
-            self.addEncodedQuery("opened_bySTARTSWITHc")
+            self.addEncodedQuery("caller_idSTARTSWITHc")
             self.query()
             if self.hasNext():
                 self.next()
@@ -270,7 +270,7 @@ class GlideRecord:
             self.clearQuery()
             self.setRowCount("")
             self.addQuery("active", "true")
-            self.addEncodedQuery("opened_bySTARTSWITHc")
+            self.addEncodedQuery("caller_idSTARTSWITHc")
             self.query()
             #Now let's see if exactly one record is deleted
             if self.getRowCount() == num_records - 1:
