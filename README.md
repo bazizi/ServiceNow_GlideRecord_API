@@ -176,6 +176,7 @@ gr.insert(record_info)
 | addQuery(key, value) | Adds a filter to the query | gr.addQuery("active", "true") |
 | addEncodedQuery(filter) | Used to add a sysparm_query to the GlideRecord | gr.addEncodedQuery("active=true") |
 | query()  | queries the table  | query() |
+|clearQuery() | clears the filters that were added to the query | gr.clearQuery() |
 | getRow() | returns an array containing the table row where cursor is pointing to | gr.getRow() |
 | getValue(column_name) | returns the value of a column in the current row | gr.getValue('u_phone_number') |
 | getHeaders() | returns the table headers (names of table columns) in an array | gr.getHeaders() |
