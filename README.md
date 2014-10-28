@@ -215,6 +215,11 @@ Test 4: Testing update of exactly 2 records                           PASSED
 
 Test 5: Clearing traces of the tests (removing records created)       PASSED
 
+<br />
+
+---
+---
+
 
 ####Available Member Functions:
 | Funcation name  | Description  | Example |
@@ -239,6 +244,10 @@ Test 5: Clearing traces of the tests (removing records created)       PASSED
 | delete() | Delete a single record. The syparm_sys_id of the record needs to be added to query beforehand | gr.delete() |
 | getValue(key) | Get the value of a cell in the row where cursor is pointing | gr.getValue('u\_phone\_number') |
 ==============================================================================================
+
+---
+---
+
 ###License Information:
 
 The MIT License (MIT)<br />
