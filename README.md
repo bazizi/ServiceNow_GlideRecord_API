@@ -166,6 +166,36 @@ record_info = {
 gr.insert(record_info)
 
 ```
+####Unit Testing
+Some unit testing is added as well to ensure everything works as expected. To do the unit testing yourself, create a Python script similar to the following and run it:
+
+#####Sample Unit Test Script:
+```python
+from GlideRecord import *
+
+#Set which table to query
+gr = GlideRecord("incident")
+
+#Set the url to the server were the ServiceNow instance is
+gr.set_server("https://sfustg.service-now.com/")
+
+gr.get_credentials()
+gr.unittest()
+
+```
+
+If everything works as expected, the following output is shown in the command line:
+
+Test 1: Testing insertion of exactly 3 new records                    PASSED
+
+Test 2: Testing retrieval of exactly 3 records                        PASSED
+
+Test 3: Testing deletion of exactly 1 record                          PASSED
+
+Test 4: Testing update of exactly 2 records                           PASSED
+
+Test 5: Clearing traces of the tests (removing records created)       PASSED
+
 
 ####Available Member Functions:
 | Funcation name  | Description  | Example |
