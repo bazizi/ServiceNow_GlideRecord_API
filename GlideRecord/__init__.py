@@ -33,27 +33,33 @@ class GlideRecord:
         self.query_data['rowCount'] = 100
         self.query_data['sysparm_query'] = None
 
-
+    #Sets the URL to the servicenow server for future queries (e.g., ubc.service-now.com)
     def set_server(self, srvname):
         self.query_data['server'] = srvname
         self.query_data['URL'] = '%s/%s.do?JSONv2&sysparm_record_count=%s&sysparm_action=%s&sysparm_query=' % (self.query_data['server'], self.query_data['tableName'], self.query_data['rowCount'], self.query_data['actionType'])
         #print self.query_data['URL']
 
+    #Sets the user credentials (username and password) for future queries
     def set_credentials(self, uname, passwd):
         self.username = uname
         self.password = passwd
         self.reset_credentials()
 
-
+    #Running this function makes the script ask for username and password
+    #password is entered in hidden format
+    #this function is used instead of the above function,
+    # in case users do not want to provide their credentials in plain text
     def get_credentials(self):
             self.username = raw_input("Please enter ServiceNow username: ")
             self.password = getpass.getpass("Please enter ServiceNow password for %s:" % self.username)
             self.reset_credentials()
 
-
+    #This is a helper function, not to be used directly
+    #It basically stored the username and password in encrypted format, for future queries
     def reset_credentials(self):
         self.encodedAuth = base64.b64encode(self.username + ":" + self.password)
 
+    #This function is not used, please ignore this
     def is_user_creds_valid(self):
         request = re.sub('sysparm_record_count=[^&]*', 'sysparm_record_count=1', self.query_data['URL'])
         result = self.get_url(request)
@@ -61,7 +67,7 @@ class GlideRecord:
             return True
         return False
 
-
+    #It checks if there is a record in the table which has key==value, returns a boolean
     def get(self, key, value):
         self.addQuery(key, value)
         self.setRowCount(1)
@@ -70,12 +76,15 @@ class GlideRecord:
             return True
         return False
 
+    #If the cursor is not at the end of the records returns True
+    #Else returns false
     def hasNext(self):
         if self.getRowCount() > 0 and self.currentIndex + 1 < self.getRowCount():
             self.currentIndex += 1
             return True
         return False
 
+    #Adds an encoded query to the query string (e.g., "u_phone_number=12345")
     def addEncodedQuery(self, queryString):
         if not self.query_data['sysparm_query']:
             self.query_data['sysparm_query'] = queryString
@@ -83,10 +92,14 @@ class GlideRecord:
             self.query_data['sysparm_query'] += "^" + queryString
         #print self.query_data
 
+    #Gets the value of the key column in the row where the cursor is pointing to
+    #For example, getValue("u_phone_number")
     def getValue(self, key):
         rs = self.results[self.currentIndex][key]
         return rs
 
+    #Sets the value of <key> in all records returned by the query
+    #for example, setValues("u_phone_number", "12345") sets values of all phone numbers to '12345'
     def setValues(self, key, value, show_results=True):
         request = re.sub('sysparm_action=[^&]*', 'sysparm_action=%s' % 'update', self.query_data['URL'])
         request +=  self.query_data['sysparm_query']
@@ -103,10 +116,13 @@ class GlideRecord:
             for r in updated_records:
                 print r['number']
 
+    #Inserts a new ticket into servicenow based on the JSON-fromatted data
     def insert(self, data):
         request = re.sub('sysparm_action=[^&]*', 'sysparm_action=%s' % 'insert', self.query_data['URL'])
         self.post_url(request, json.dumps(data))
 
+    #If 'sysparm_sys_id' is already added to the query string,
+    #then this function deletes the record with the given 'sysparm_sys_id'
     def delete(self):
         query = self.query_data['sysparm_query']
         if not re.findall('syparm_sys_id', query):
@@ -120,6 +136,7 @@ class GlideRecord:
         #print data
         self.post_url(request, data)
 
+    #Deletes ALL records from servicenow that were returned by the query after query is run
     def deleteMultiple(self):
         url = self.query_data['URL']
         request = re.sub('sysparm_action=[^&]*', 'sysparm_action=%s' % 'deleteMultiple', url)
@@ -127,6 +144,8 @@ class GlideRecord:
             'sysparm_query' : self.query_data['sysparm_query']
         }))
 
+    #This is just a helper function
+    #It refreshes the query string to contain most updated queries
     def refreshQuery(self):
         self.currentIndex = -1
         self.query_data['URL'] = re.sub('sysparm_action=[^&]*', 'sysparm_action=%s' % self.query_data['actionType'],
@@ -134,25 +153,28 @@ class GlideRecord:
         self.query_data['URL'] = re.sub('sysparm_record_count=[^&]*', 'sysparm_record_count=%s' % self.query_data['rowCount'],
                                         self.query_data['URL'])
 
+    #Returns the row to which cursor is currently pointing
     def getRow(self):
         rs = []
         for value in self.results[self.currentIndex].values():
             rs.append(str(value))
         return rs
 
-
+    #Returns the headers of the table (i.e., names of the table columns)
     def getHeaders(self):
         rs = []
         for key in self.results[self.currentIndex].keys():
             rs.append(str(key))
         return rs
 
+    #Makes the cursor move to the next record in the table
     def next(self):
         if self.currentIndex + 1 < self.getRowCount():
             self.currentIndex += 1
             return  True
         return  False
 
+    #Adds a new query (filter) to the query string (e.g., addQuery("active", "true")
     def addQuery(self, key, value=""):
         if not self.query_data['sysparm_query']:
             self.query_data['sysparm_query'] = "%s=%s" % (key, value)
@@ -161,6 +183,7 @@ class GlideRecord:
 
         #print self.query_data
 
+    #Queries ServiceNow, and stores the results in a variable, for future access
     def query(self):
         request = self.query_data['URL'] + self.query_data['sysparm_query']
         raw_json = self.get_url(request)
@@ -168,21 +191,26 @@ class GlideRecord:
         if raw_json:
             self.results = json.load(raw_json)['records']
 
+    #This is just a helper function
+    #Returns the request URL (excluding the query)
     def getQuery(self):
         return self.query_data['URL']
 
+    #Limits the number of rows returned by queries (the default is 100 results per query)
     def setRowCount(self, n):
         self.query_data['rowCount'] = n
         self.refreshQuery()
 
+    #Returns the number of table rows returned by the query
     def getRowCount(self):
         return len(self.results)
 
-
+    #Clears all filters added to the query string
     def clearQuery(self):
         self.currentIndex = -1
         self.query_data['sysparm_query'] = ""
 
+    #This function does a bunch of testing to make sure everything works as expected
     def unittest(self):
         def test_limited_retrieval():
             self.test_num += 1
