@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name = 'GlideRecord',
   packages = ['GlideRecord'], # this must be the same as the name above
-  version = '0.011',
+  version = '0.012',
   description = 'ServiceNow GlideRecord API for Python',
   author = 'Behnam Azizi',
   author_email = 'bazizi@sfu.ca',
