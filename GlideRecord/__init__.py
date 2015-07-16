@@ -212,7 +212,7 @@ class GlideRecord:
     # This is just a helper function
     # Returns the request URL (excluding the query)
     def getQuery(self):
-        return self.query_data['URL']
+        return self.query_data['sysparm_query']
 
     # Limits the number of rows returned by queries (the default is 100
     # results per query)
