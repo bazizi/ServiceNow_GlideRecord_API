@@ -1,6 +1,6 @@
 ServiceNow GlideRecord API
 ==========================
-Using ServiceNow GlideRecord API in Python you can run GlideRecord commands right from your own computer and/or automate ServiceNow tasks.
+With the ServiceNow GlideRecord API, you can run GlideRecord commands right from your own computer using Python and/or automate ServiceNow tasks.
 
 Current capabilities are:
 - Query records using filters (sysparm_query)
@@ -8,21 +8,21 @@ Current capabilities are:
 - Update existing records
 - Remove a record or a set of records all at once, using filters
 
-###GlideRecord API for ServiceNow in Python
-####Installation:
-#####Using PIP (Recommended)
+### GlideRecord API for ServiceNow in Python
+#### Installation:
+##### Using PIP (Recommended)
 If your version of Python supports PIP package manager, installation is as simple as running this command:
 
 *pip install GlideRecord*
 
-If not, it is recommended that you install pip from the following URL, and retry the above command:
+It is recommended you install pip from the following URL if not installed, and retry the above command:
 http://pip.readthedocs.org/en/latest/installing.html
 
-Also please note that in Linux systems you may need to run the above commands as root:
+Please note Linux systems may need to run the above commands as root:
 
 *sudo pip install GlideRecord*
 
-#####Manual installation using Git
+##### Manual installation using Git
 If you have Git, you can install GlideRecord API by running these commands in order:
 - *git clone https://github.com/bazizi/ServiceNow_GlideRecord_API.git*
 - *cd ServiceNow_GlideRecord_API*
@@ -31,15 +31,15 @@ If you have Git, you can install GlideRecord API by running these commands in or
 ---
 ---
 
-#####Need help?
+##### Need help?
 If you need any help regarding installation and/or usage of GlideRecord API, feel free to contact me via my email: b.azizi@rocketmail.com
 
 ---
 ---
 
-####Examples:
+#### Examples:
 
-#####Read data in a table, using filters:
+##### Read data in a table, using filters:
 The below code snippet **reads** records stored in the 'incident' table that have status 'active' and are created by someone with a specific caller ID.
 ```python
 from GlideRecord import *
@@ -81,7 +81,7 @@ while gr.next():
 
 ---
 
-#####Update existing records, using filters:
+##### Update existing records, using filters:
 The below code snippet **updates** exactly 150 of the records stored in the 'incident' table that have status 'active' and contact-type 'self-service'.
 
 ```python
@@ -115,7 +115,7 @@ gr.setValues("caller_id", "Behnam Azizi [bazizi]")
 
 ---
 
-#####Delete a set of records returned by a filter:
+##### Delete a set of records returned by a filter:
 The below code snippet **deletes** all 'incident' records  that status 'active' and have the specified caller ID.
 
 ```python
@@ -148,7 +148,7 @@ gr.deleteMultiple()
 
 ---
 
-#####Insert a new record into any given table:
+##### Insert a new record into any given table:
 The below code snippet **inserts** a new record into the 'incident' table, using the specified values.
 ```python
 from GlideRecord import *
@@ -185,10 +185,10 @@ gr.insert(record_info)
 ---
 
 
-####Unit Testing
+#### Unit Testing
 Some unit testing is added as well to ensure everything works as expected. To do the unit testing yourself, create a Python script similar to the following and run it:
 
-#####Sample Unit Test Script:
+##### Sample Unit Test Script:
 ```python
 from GlideRecord import *
 
@@ -221,7 +221,7 @@ Test 5: Clearing traces of the tests (removing records created)       PASSED
 ---
 
 
-####Available Member Functions:
+#### Available Member Functions:
 | Funcation name  | Description  | Example |
 |---|---|---|
 | set\_server(server\_name) | Used to indicate which server to query | gr.set\_server("ubc.service-now.com") |
@@ -248,7 +248,7 @@ Test 5: Clearing traces of the tests (removing records created)       PASSED
 ---
 ---
 
-###License Information:
+### License Information:
 
 The MIT License (MIT)<br />
 Copyright (c) 2014 Behnam Azizi<br />
