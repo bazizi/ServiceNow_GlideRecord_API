@@ -1,3 +1,5 @@
+**Note**: I am no longer maintaining this project since I do not have access to a ServiceNow instance to test things.
+
 ServiceNow GlideRecord API
 ==========================
 With the ServiceNow GlideRecord API, you can run GlideRecord commands right from your own computer using Python and/or automate ServiceNow tasks.
